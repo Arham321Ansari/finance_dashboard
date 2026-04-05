@@ -18,7 +18,7 @@ const createRecord = async(req,res)=>{
 const getRecord = async(req,res)=>{
     try{
         const {type, category, startDate, endDate} = req.query;
-        let filter = {};
+        let filter = {user: req.user.id};
         if(type) filter.type = type;
         if(category) filter.category = category;
         if(startDate && endDate){
@@ -37,8 +37,8 @@ const getRecord = async(req,res)=>{
 //updates Record (Admin only)
 const updateRecord = async(req,res)=>{
     try{
-        const record = await Record.findByIdAndUpdate(
-            req.params.id,
+        const record = await Record.findByOneAndUpdate(
+            { _id: req.params.id, user:req.user.id},
             req.body,
             {new:true}
         )
@@ -51,7 +51,10 @@ const updateRecord = async(req,res)=>{
 //Delete record (Admin Only)
 const deleteRecord = async(req,res)=>{
     try{
-        await Record.findByIdAndDelete(req.params.id);
+        await Record.findByIdAndDelete({ 
+            _id: req.params.id,
+            user:req.user.id
+        });
         res.json({ message:"Record Deleted"});
     }catch(error){
         res.status(500).json({message:error.message})

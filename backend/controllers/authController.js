@@ -7,11 +7,11 @@ const { json } = require("express");
 
 const registerUser = async(req,res)=>{
     try{
-        const {name,email,password,role} = req.body;
+        const {name,email,password} = req.body;
 
         const userExist = await User.findOne({email});
         if(userExist){
-            return res.status(404).json({message: "User already exist"});
+            return res.status(400).json({message: "User already exist"});
         }
         const hashedPassword = await bcrypt.hash(password,10);
 
@@ -19,7 +19,6 @@ const registerUser = async(req,res)=>{
             name,
             email,
             password: hashedPassword,
-            role
         })
         res.status(201).json(
             {

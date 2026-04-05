@@ -45,13 +45,13 @@ const Register = ()=>{
         />
         <br /><br />
 
-        <select
+        {/* <select
           onChange={(e) => setForm({ ...form, role: e.target.value })}
         >
           <option value="viewer">Viewer</option>
           <option value="analyst">Analyst</option>
           <option value="admin">Admin</option>
-        </select>
+        </select> */}
 
         <br /><br />
 
