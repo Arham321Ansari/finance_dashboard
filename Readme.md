@@ -60,7 +60,7 @@ A full-stack financial management system built using the MERN stack with role-ba
 
 ```bash
 git clone https://github.com/your-username/finance_dashboard.git
-cd finance-dashboard
+cd finance_dashboard
 ```
 
 ---
